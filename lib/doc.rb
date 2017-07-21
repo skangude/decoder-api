@@ -13,6 +13,14 @@ class Doc
       (1..@frq.max_ngrams).each { |i|
         @frq.freq_n_chars[i]=n_gram_hash(i,@frq.max_ngram_freqs)
       }
+
+      # Sanitize that all characters are present in the @frq.freq_n_chars[1]
+      ('a'..'z').each {|c|
+        if !@frq.freq_n_chars[1].key?(c)
+          @frq.freq_n_chars[1][c] = 0.0
+        end
+      }
+
     end
   end
 
